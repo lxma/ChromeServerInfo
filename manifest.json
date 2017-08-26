@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "My Extension",
+  "name": "Chrome Server Info",
   "version": "0.1",
   "browser_action": {
     "default_icon": "icon.png"
@@ -18,15 +18,11 @@
   ],
   "background": {
     "scripts": [
-      "background/background.js",
-      "background/trafficInspector.js"
+      "background/background.js"
     ]
   },
   "permissions": [
-    "activeTab",
-    "webRequest",
-    "webRequestBlocking",
-    "<all_urls>"
+    "tabs"
   ],
   "web_accessible_resources": [
     "inject/*.js"
