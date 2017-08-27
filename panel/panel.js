@@ -7,3 +7,5 @@ chrome.devtools.panels.create("Server",
         // console.log("Panel created");
     }
 );
+
+

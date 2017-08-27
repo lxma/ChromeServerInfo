@@ -15,8 +15,9 @@ var togglePopupVisibilty = function () {
 
 var popupBackgrounds = {
     default: "-webkit-gradient(linear, left top, left bottom, from(#2288dd), to(#113399))",
-    warn: "-webkit-gradient(linear, left top, left bottom, from(#cc8822), to(#996611))"
-}
+    warn: "-webkit-gradient(linear, left top, left bottom, from(#cc8822), to(#996611))",
+    alarm: "-webkit-gradient(linear, left top, left bottom, from(#CC4422), to(#992211))"
+};
 
 // Called when the user clicks on the browser action.
 chrome.browserAction.onClicked.addListener(function (tab) {
@@ -36,9 +37,12 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                 popupBackground = popupBackgrounds.warn;
             }
             var hostname = urlDetails[2];
+            if(hostname.length > 60) {
+                popupBackground = popupBackgrounds.alarm;
+            }
             popupContent = hostname;
         } else {
-            popupContent = "no http: URL = " + sender.tab.url;
+            popupContent = sender.tab.url || "empty URL";
         }
         chrome.tabs.sendMessage(sender.tab.id, {
             message: "csi-set-popup-content",
